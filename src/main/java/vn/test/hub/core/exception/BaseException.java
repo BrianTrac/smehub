@@ -2,7 +2,6 @@ package vn.test.hub.core.exception;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 import java.time.Instant;
@@ -11,7 +10,6 @@ import java.util.Map;
 
 @Getter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class BaseException extends RuntimeException {
     private int code;

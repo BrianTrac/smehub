@@ -72,28 +72,4 @@ public class ResponseUtils {
         return generateErrorResponse(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-//    public <T, T1> BaseResponse<T, T1> success (T data, T1 metadata, String message) {
-//        return BaseResponse.<T, T1>builder()
-//                .status("success")
-//                .message(message)
-//                .data(data)
-//                .metadata(metadata)
-//                .build();
-//    }
-//
-//    public <T> BaseResponse<T, Void> success (T data, String message) {
-//        return success(data, null, message);
-//    }
-//
-//    public <T> BaseResponse<T, Void> success (T data) {
-//        return success(data, "Success");
-//    }
-//
-//    public <T> BaseResponse<Void, Void> success (String message) {
-//        return success(null, message);
-//    }
-//
-//    public <T> BaseResponse<Void, Void> success () {
-//        return success("Success");
-//    }
 }

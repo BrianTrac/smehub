@@ -1,4 +1,4 @@
-package vn.test.hub.core.jpa_auditing;
+package vn.test.hub.core.auditing;
 
 import org.springframework.context.annotation.*;
 import org.springframework.data.domain.AuditorAware;

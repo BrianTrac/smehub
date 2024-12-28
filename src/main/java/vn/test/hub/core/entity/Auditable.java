@@ -24,11 +24,11 @@ public abstract class Auditable {
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdDate = LocalDateTime.now();
+    private LocalDateTime createdDate;
 
     @LastModifiedDate
     @Column(name = "updated_at")
-    private LocalDateTime lastModifiedDate = LocalDateTime.now();
+    private LocalDateTime lastModifiedDate;
 
     @CreatedBy
     @Column(name = "created_by", nullable = false, updatable = false)
@@ -36,7 +36,7 @@ public abstract class Auditable {
 
     @Column(name = "updated_by")
     @LastModifiedBy
-    private String lastModifiedBy = "admin";
+    private String lastModifiedBy;
 
     @Column(name = "deleted")
     private Boolean deleted = false;

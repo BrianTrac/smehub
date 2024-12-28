@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import vn.test.hub.core.response.BaseResponse;
+import vn.test.hub.core.utils.ResponseUtils;
 
 import java.time.Instant;
 import java.util.HashMap;
@@ -13,6 +14,11 @@ import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+    private final ResponseUtils responseUtils;
+
+    public GlobalExceptionHandler(ResponseUtils responseUtils) {
+        this.responseUtils = responseUtils;
+    }
 
     @ExceptionHandler(BaseException.class)
     public ResponseEntity<BaseResponse<Void, Map<String, Object>>> handleBaseException(BaseException ex, HttpServletRequest request) {
@@ -20,13 +26,7 @@ public class GlobalExceptionHandler {
         Map<String, Object> metadata = ex.getMetadata();
         metadata.put("url", request.getMethod() + " " + request.getRequestURL().toString());
 
-        BaseResponse<Void, Map<String, Object>> response = BaseResponse.<Void, Map<String, Object>> builder()
-                .status("error")
-                .message(ex.getMessage())
-                .metadata(metadata)
-                .build();
-
-        return new ResponseEntity<>(response, ex.getHttpStatus());
+        return responseUtils.generateErrorResponse(ex.getMessage(), ex.getMetadata(), ex.getHttpStatus());
     }
 
     @ExceptionHandler(Exception.class)
@@ -36,12 +36,9 @@ public class GlobalExceptionHandler {
         metadata.put("timestamp", Instant.now());
         metadata.put("url", request.getMethod() + " " +  request.getRequestURL().toString());
 
-        BaseResponse<Void, Map<String, Object>> response = BaseResponse.<Void, Map<String, Object>>builder()
-                .status("error")
-                .message(ex.getMessage() != null ? ex.getMessage() : "Internal Server Error")
-                .metadata(metadata)
-                .build();
-
-        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        return responseUtils.generateErrorResponse(
+                ex.getMessage() != null ? ex.getMessage() : "Internal Server Error",
+                metadata,
+                HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

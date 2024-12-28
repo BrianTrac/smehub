@@ -1,8 +1,6 @@
-package vn.test.hub.core.jpa_auditing;
+package vn.test.hub.core.auditing;
 
 import org.springframework.data.domain.AuditorAware;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Optional;
 
