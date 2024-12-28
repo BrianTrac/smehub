@@ -1,4 +1,4 @@
-package vn.test.hub.core;
+package vn.test.hub.core.info;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

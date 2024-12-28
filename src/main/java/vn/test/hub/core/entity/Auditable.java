@@ -1,4 +1,4 @@
-package vn.test.hub.core;
+package vn.test.hub.core.entity;
 
 
 import jakarta.persistence.*;
