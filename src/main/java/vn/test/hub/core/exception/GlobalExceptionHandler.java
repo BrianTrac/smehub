@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
         Map<String, Object> metadata = ex.getMetadata();
         metadata.put("url", request.getMethod() + " " + request.getRequestURL().toString());
 
-        return responseUtils.generateErrorResponse(ex.getMessage(), ex.getMetadata(), ex.getHttpStatus());
+        return responseUtils.error(ex.getMessage(), ex.getMetadata(), ex.getHttpStatus());
     }
 
     @ExceptionHandler(Exception.class)
@@ -36,7 +36,7 @@ public class GlobalExceptionHandler {
         metadata.put("timestamp", Instant.now());
         metadata.put("url", request.getMethod() + " " +  request.getRequestURL().toString());
 
-        return responseUtils.generateErrorResponse(
+        return responseUtils.error(
                 ex.getMessage() != null ? ex.getMessage() : "Internal Server Error",
                 metadata,
                 HttpStatus.INTERNAL_SERVER_ERROR);

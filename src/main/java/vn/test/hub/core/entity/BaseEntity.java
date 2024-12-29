@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @Getter
 @Setter
-@EntityListeners(AuditingEntityListener.class)
-public abstract class Auditable {
+@EntityListeners(AuditingEntityListener.class) // Base entity
+public abstract class BaseEntity {
 
     @Id
     @GeneratedValue(generator = "uuid")
