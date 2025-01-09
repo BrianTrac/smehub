@@ -4,14 +4,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import vn.test.hub.core.response.BaseResponse;
+import vn.test.hub.core.response.ResponseStatus;
 
 @Component
 public class ResponseUtils {
     // success
-    public <T1, T2> ResponseEntity<BaseResponse<T1, T2>> success(String message, T1 data, T2 metadata) {
+    public static <T1, T2> ResponseEntity<BaseResponse<T1, T2>> success(String message, T1 data, T2 metadata) {
         return ResponseEntity.ok(
                 BaseResponse.<T1, T2>builder()
-                        .status("success")
+                        .status(ResponseStatus.SUCCESS.getValue())
                         .message(message)
                         .data(data)
                         .metadata(metadata)
@@ -19,53 +20,53 @@ public class ResponseUtils {
         );
     }
 
-    public <T1> ResponseEntity<BaseResponse<T1, Void>> success(String message, T1 data) {
+    public static <T1> ResponseEntity<BaseResponse<T1, Void>> success(String message, T1 data) {
         return success(message, data, null);
     }
 
-    public <T1> ResponseEntity<BaseResponse<T1, Void>> success(T1 data) {
-        return success("Success", data, null);
+    public static  <T1> ResponseEntity<BaseResponse<T1, Void>> success(T1 data) {
+        return success(ResponseStatus.SUCCESS.getValue(), data, null);
     }
 
-    public ResponseEntity<BaseResponse<Void, Void>> success(String message) {
+    public static ResponseEntity<BaseResponse<Void, Void>> success(String message) {
         return success(message, null, null);
     }
 
-    public ResponseEntity<BaseResponse<Void, Void>> success() {
-        return success("Success");
+    public static ResponseEntity<BaseResponse<Void, Void>> success() {
+        return success(ResponseStatus.SUCCESS.getValue());
     }
 
-    public <T1, T2> BaseResponse<T1, T2> successResponse(String message, T1 data, T2 metadata) {
+    public static <T1, T2> BaseResponse<T1, T2> successResponse(String message, T1 data, T2 metadata) {
         return BaseResponse.<T1, T2>builder()
-                .status("success")
+                .status(ResponseStatus.SUCCESS.getValue())
                 .message(message)
                 .data(data)
                 .metadata(metadata)
                 .build();
     }
 
-    public <T1> BaseResponse<T1, Void> successResponse(String message, T1 data) {
+    public static <T1> BaseResponse<T1, Void> successResponse(String message, T1 data) {
         return successResponse(message, data, null);
     }
 
-    public <T1> BaseResponse<T1, Void> successResponse(T1 data) {
-        return successResponse("Success", data, null);
+    public static <T1> BaseResponse<T1, Void> successResponse(T1 data) {
+        return successResponse(ResponseStatus.SUCCESS.getValue(), data, null);
     }
 
-    public BaseResponse<Void, Void> successResponse(String message) {
+    public static BaseResponse<Void, Void> successResponse(String message) {
         return successResponse(message, null, null);
     }
 
-    public BaseResponse<Void, Void> successResponse() {
-        return successResponse("Success");
+    public static BaseResponse<Void, Void> successResponse() {
+        return successResponse(ResponseStatus.SUCCESS.getValue());
     }
 
 
     // created
-    public <T1, T2> ResponseEntity<BaseResponse<T1, T2>> created(String message, T1 data, T2 metadata) {
+    public static <T1, T2> ResponseEntity<BaseResponse<T1, T2>> created(String message, T1 data, T2 metadata) {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 BaseResponse.<T1, T2>builder()
-                        .status("success")
+                        .status(ResponseStatus.CREATED.getValue())
                         .message(message)
                         .data(data)
                         .metadata(metadata)
@@ -73,104 +74,104 @@ public class ResponseUtils {
         );
     }
 
-    public <T1> ResponseEntity<BaseResponse<T1, Void>> created(String message, T1 data) {
+    public static <T1> ResponseEntity<BaseResponse<T1, Void>> created(String message, T1 data) {
         return created(message, data, null);
     }
 
-    public <T1> ResponseEntity<BaseResponse<T1, Void>> created(T1 data) {
-        return created("Created", data, null);
+    public static <T1> ResponseEntity<BaseResponse<T1, Void>> created(T1 data) {
+        return created(ResponseStatus.CREATED.getValue(), data, null);
     }
 
-    public ResponseEntity<BaseResponse<Void, Void>> created(String message) {
+    public static ResponseEntity<BaseResponse<Void, Void>> created(String message) {
         return created(message, null, null);
     }
 
-    public ResponseEntity<BaseResponse<Void, Void>> created() {
-        return created("Created");
+    public static ResponseEntity<BaseResponse<Void, Void>> created() {
+        return created(ResponseStatus.CREATED.getValue());
     }
 
-    public <T1, T2> BaseResponse<T1, T2> createdResponse(String message, T1 data, T2 metadata) {
+    public static <T1, T2> BaseResponse<T1, T2> createdResponse(String message, T1 data, T2 metadata) {
         return BaseResponse.<T1, T2>builder()
-                .status("success")
+                .status(ResponseStatus.CREATED.getValue())
                 .message(message)
                 .data(data)
                 .metadata(metadata)
                 .build();
     }
 
-    public <T1> BaseResponse<T1, Void> createdResponse(String message, T1 data) {
+    public static <T1> BaseResponse<T1, Void> createdResponse(String message, T1 data) {
         return createdResponse(message, data, null);
     }
 
-    public <T1> BaseResponse<T1, Void> createdResponse(T1 data) {
-        return createdResponse("Created", data, null);
+    public static <T1> BaseResponse<T1, Void> createdResponse(T1 data) {
+        return createdResponse(ResponseStatus.CREATED.getValue(), data, null);
     }
 
-    public BaseResponse<Void, Void> createdResponse(String message) {
+    public static BaseResponse<Void, Void> createdResponse(String message) {
         return createdResponse(message, null, null);
     }
 
-    public BaseResponse<Void, Void> createdResponse() {
-        return createdResponse("Created");
+    public static BaseResponse<Void, Void> createdResponse() {
+        return createdResponse(ResponseStatus.CREATED.getValue());
     }
 
     
     // error
-    public <T> ResponseEntity<BaseResponse<Void, T>> error(String message, T errorInfo, HttpStatus httpStatus) {
+    public static <T> ResponseEntity<BaseResponse<Void, T>> error(String message, T errorInfo, HttpStatus httpStatus) {
         return ResponseEntity.status(httpStatus).body(
                 BaseResponse.<Void, T>builder()
-                        .status("error")
+                        .status(ResponseStatus.ERROR.getValue())
                         .message(message)
                         .metadata(errorInfo)
                         .build()
         );
     }
 
-    public ResponseEntity<BaseResponse<Void, Void>> error(String message, HttpStatus httpStatus) {
+    public static ResponseEntity<BaseResponse<Void, Void>> error(String message, HttpStatus httpStatus) {
         return error(message, null, httpStatus);
     }
 
-    public <T> ResponseEntity<BaseResponse<Void, T>> error(String message, T errorInfo) {
+    public static <T> ResponseEntity<BaseResponse<Void, T>> error(String message, T errorInfo) {
         return error(message, errorInfo, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    public <T> ResponseEntity<BaseResponse<Void, T>> error(T errorInfo) {
-        return error("Error", errorInfo, HttpStatus.INTERNAL_SERVER_ERROR);
+    public static <T> ResponseEntity<BaseResponse<Void, T>> error(T errorInfo) {
+        return error(ResponseStatus.ERROR.getValue(), errorInfo, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    public ResponseEntity<BaseResponse<Void, Void>> error(String message) {
+    public static ResponseEntity<BaseResponse<Void, Void>> error(String message) {
         return error(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    public ResponseEntity<BaseResponse<Void, Void>> error() {
-        return error("Error");
+    public static ResponseEntity<BaseResponse<Void, Void>> error() {
+        return error(ResponseStatus.ERROR.getValue());
     }
 
-    public <T> BaseResponse<Void, T> errorResponse(String message, T errorInfo, HttpStatus httpStatus) {
+    public static <T> BaseResponse<Void, T> errorResponse(String message, T errorInfo, HttpStatus httpStatus) {
         return BaseResponse.<Void, T>builder()
-                .status("error")
+                .status(ResponseStatus.ERROR.getValue())
                 .message(message)
                 .metadata(errorInfo)
                 .build();
     }
 
-    public BaseResponse<Void, Void> errorResponse(String message, HttpStatus httpStatus) {
+    public static BaseResponse<Void, Void> errorResponse(String message, HttpStatus httpStatus) {
         return errorResponse(message, null, httpStatus);
     }
 
-    public <T> BaseResponse<Void, T> errorResponse(String message, T errorInfo) {
+    public static <T> BaseResponse<Void, T> errorResponse(String message, T errorInfo) {
         return errorResponse(message, errorInfo, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    public <T> BaseResponse<Void, T> errorResponse(T errorInfo) {
-        return errorResponse("Error", errorInfo, HttpStatus.INTERNAL_SERVER_ERROR);
+    public static <T> BaseResponse<Void, T> errorResponse(T errorInfo) {
+        return errorResponse(ResponseStatus.ERROR.getValue(), errorInfo, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    public BaseResponse<Void, Void> errorResponse(String message) {
+    public static BaseResponse<Void, Void> errorResponse(String message) {
         return errorResponse(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    public BaseResponse<Void, Void> errorResponse() {
-        return errorResponse("Error");
+    public static BaseResponse<Void, Void> errorResponse() {
+        return errorResponse(ResponseStatus.ERROR.getValue());
     }
 }
