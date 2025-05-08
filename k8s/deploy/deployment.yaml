@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: common-core-application
+  namespace: sme-hub
+  labels:
+    app: common-core-application
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: common-core-application
+  template:
+    metadata:
+      labels:
+        app: common-core-application
+    spec:
+      containers:
+        - name: common-core-application
+          image: brian1011/common-core:1.0.0
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "0.5"
+              memory: "256Mi"
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+          envFrom:
+            - secretRef:
+                name: common-core-secret
