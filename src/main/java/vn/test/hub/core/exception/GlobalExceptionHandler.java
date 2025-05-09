@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
         metadata.put("url", request.getMethod() + " " +  request.getRequestURL().toString());
 
         return ResponseUtils.error(
-                "Internal Server Error",
+                ex.getMessage() != null ? ex.getMessage() : "Internal server error",
                 metadata,
                 HttpStatus.INTERNAL_SERVER_ERROR);
     }

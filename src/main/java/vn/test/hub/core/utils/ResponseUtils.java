@@ -36,6 +36,18 @@ public class ResponseUtils {
         return success(ResponseStatus.SUCCESS.getValue());
     }
 
+    public static <T1, T2> ResponseEntity<BaseResponse<T1, T2>> success(T1 data, T2 metadata) {
+        return success(ResponseStatus.SUCCESS.getValue(), data, metadata);
+    }
+
+    public static <T1, T2> BaseResponse<T1, T2> successResponse(T1 data, T2 metadata) {
+        return BaseResponse.<T1, T2>builder()
+                .status(ResponseStatus.SUCCESS.getValue())
+                .data(data)
+                .metadata(metadata)
+                .build();
+    }
+
     public static <T1, T2> BaseResponse<T1, T2> successResponse(String message, T1 data, T2 metadata) {
         return BaseResponse.<T1, T2>builder()
                 .status(ResponseStatus.SUCCESS.getValue())
