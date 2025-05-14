@@ -139,9 +139,9 @@ public class ResponseUtils {
         );
     }
 
-    public static <T> ResponseEntity<BaseResponse<T, Void>> error(String message, HttpStatus httpStatus) {
+    public static <T, T2> ResponseEntity<BaseResponse<T, T2>> error(String message, HttpStatus httpStatus) {
         return ResponseEntity.status(httpStatus).body(
-                BaseResponse.<T, Void>builder()
+                BaseResponse.<T, T2>builder()
                         .status(ResponseStatus.ERROR.getValue())
                         .message(message)
                         .data(null)

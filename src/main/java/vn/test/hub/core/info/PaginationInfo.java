@@ -23,6 +23,4 @@ public class PaginationInfo {
                 .currentPage(page.getNumber())
                 .build();
     }
-
-
 }
