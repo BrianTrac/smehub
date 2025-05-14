@@ -139,8 +139,15 @@ public class ResponseUtils {
         );
     }
 
-    public static ResponseEntity<BaseResponse<Void, Void>> error(String message, HttpStatus httpStatus) {
-        return error(message, null, httpStatus);
+    public static <T> ResponseEntity<BaseResponse<T, Void>> error(String message, HttpStatus httpStatus) {
+        return ResponseEntity.status(httpStatus).body(
+                BaseResponse.<T, Void>builder()
+                        .status(ResponseStatus.ERROR.getValue())
+                        .message(message)
+                        .data(null)
+                        .metadata(null)
+                        .build()
+        );
     }
 
     public static <T> ResponseEntity<BaseResponse<Void, T>> error(String message, T errorInfo) {
@@ -151,7 +158,7 @@ public class ResponseUtils {
         return error(ResponseStatus.ERROR.getValue(), errorInfo, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    public static ResponseEntity<BaseResponse<Void, Void>> error(String message) {
+    public static <T> ResponseEntity<BaseResponse<T, Void>> error(String message) {
         return error(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
